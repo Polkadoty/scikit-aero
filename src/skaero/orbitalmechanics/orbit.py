@@ -742,3 +742,132 @@ def omegadot_3body(mu1,mu2,a):
     The third-body effect is a perturbation in the orbit of a satellite caused by the gravitational influence of a third body.
     """
     return -1.5 * mu2 / (mu1 * a)**2
+def escapeVelocity(mu,r):
+    """
+    Calculate the escape velocity from a central body.
+
+    Parameters
+    ----------
+    mu : float
+        Standard gravitational parameter of the central body.
+    r : float
+        Distance from the center of the central body.
+
+    Returns
+    -------
+    float
+        Escape velocity from the central body.
+
+    Notes
+    -----
+    The escape velocity is the minimum velocity required for an object to escape the gravitational influence of a central body.
+    """
+    return np.sqrt(2 * mu / r)
+def rECEF(rECI,GMST):
+    """
+    Convert the position vector from the Earth-Centered Inertial (ECI) frame to the Earth-Centered Earth-Fixed (ECEF) frame.
+
+    Parameters
+    ----------
+    rECI : numpy.ndarray
+        Position vector in the Earth-Centered Inertial (ECI) frame.
+    GMST : float
+        Greenwich Mean Sidereal Time (GMST).
+
+    Returns
+    -------
+    numpy.ndarray
+        Position vector in the Earth-Centered Earth-Fixed (ECEF) frame.
+
+    Notes
+    -----
+    The Earth-Centered Earth-Fixed (ECEF) frame is a coordinate system that is fixed to the Earth, with the x-axis pointing towards the vernal equinox, 
+    the y-axis in the plane of the equator, and the z-axis perpendicular to the equator.
+    """
+    theta = GMST
+    R = np.array([[np.cos(theta), np.sin(theta), 0],
+                  [-np.sin(theta), np.cos(theta), 0],
+                  [0, 0, 1]])
+    return np.dot(R.T, rECI)
+def vPQW(mu,p,theta,e):
+    """
+    Calculate the velocity vector in the Perifocal frame.
+
+    Parameters
+    ----------
+    mu : float
+        Standard gravitational parameter of the central body.
+    p : float
+        Semi-latus rectum of the orbit.
+    theta : float
+        True anomaly in degrees.
+    e : float
+        Eccentricity of the orbit.
+
+    Returns
+    -------
+    numpy.ndarray
+        Velocity vector in the Perifocal frame.
+
+    Notes
+    -----
+    The Perifocal frame is a coordinate system that is fixed to the 
+    orbiting body, with the x-axis pointing towards the periapsis, 
+    the y-axis in the orbital plane, and the z-axis perpendicular 
+    to the orbital plane.
+    """
+    r = p / (1 + e * np.cos(np.radians(theta)))
+    vr = np.sqrt(mu / p) * e * np.sin(np.radians(theta))
+    vtheta = np.sqrt(mu / p) * (1 + e * np.cos(np.radians(theta)))
+    return np.array([vr, vtheta, 0])
+def Omega(hy, hxy):
+    """
+    Calculate the longitude of the ascending node.
+
+    Parameters
+    ----------
+    h : numpy.ndarray
+        Specific angular momentum vector.
+    hxy : float
+        Magnitude of the specific angular momentum vector projected onto the xy-plane.
+
+    Returns
+    -------
+    float
+        Longitude of the ascending node.
+
+    Notes
+    -----
+    The longitude of the ascending node is the angle between the x-axis and the ascending node, measured in the xy-plane.
+    """
+    return np.arccos(hxy / np.linalg.norm(hy))
+def omegadot(J2,n,e,a,a_e,i):
+    """
+    Calculate the rate of change of the argument of perigee due to the J2 effect.
+
+    Parameters
+    ----------
+    J2 : float
+        J2 coefficient of the central body.
+    n : float
+        Mean motion of the orbit.
+    e : float
+        Eccentricity of the orbit.
+    a : float
+        Semi-major axis of the orbit.
+    a_e : float
+        Equatorial radius of the central body.
+    i : float
+        Inclination of the orbit.
+
+    Returns
+    -------
+    float
+        Rate of change of the argument of perigee due to the J2 effect.
+
+    Notes
+    -----
+    The J2 effect is a perturbation in the orbit of a satellite caused by the oblateness of the central body.
+    """
+    return 3/4 * J2 * (a_e / a)**2 * n / (1 - e**2)*(5 * np.cos(i) - 1 )
+## 
