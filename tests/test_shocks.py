@@ -33,21 +33,16 @@ def test_normal_shock_default_specific_heat_ratio():
     np.testing.assert_equal(ns.gamma, 7 / 5)
 
 
-def test_normal_shock_M_2():
-    """Tests the computation of post-shock Mach number.
-
-    """
-    M_1_list = [1.5, 1.8, 2.1, 3.0]
-    M_2_list = [
-        0.7011,
-        0.6165,
-        0.5613,
-        0.4752
-    ]
-    ns_list = [shocks.Shock(M_1=M_1, gamma=1.4) for M_1 in M_1_list]
-
-    for i in range(len(ns_list)):
-        np.testing.assert_almost_equal(ns_list[i].M_2, M_2_list[i], decimal=4)
+@pytest.mark.parametrize("mach_1,expected_mach_2", [
+    (1.5, 0.7011),
+    (1.8, 0.6165),
+    (2.1, 0.5613),
+    (3.0, 0.4752)
+])
+def test_normal_shock_mach(mach_1, expected_mach_2):
+    """Test post-shock Mach number calculations"""
+    shock = shocks.Shock(M_1=mach_1, gamma=1.4)
+    assert np.isclose(shock.M_2, expected_mach_2, rtol=1e-4)
 
 
 def test_normal_shock_fails_subsonic_M_1():
@@ -55,38 +50,18 @@ def test_normal_shock_fails_subsonic_M_1():
         shocks.Shock(M_1=0.8)
 
 
-def test_normal_shock_ratios():
-    """Tests normal shock ratios of thermodynamics properties.
-
-    """
-    M_1_list = [1.5, 1.8, 2.1, 3.0]
-    p_ratio_list = [
-        2.4583,
-        3.6133,
-        4.9783,
-        10.3333
-    ]
-    rho_ratio_list = [
-        1.8621,
-        2.3592,
-        2.8119,
-        3.8571
-    ]
-    T_ratio_list = [
-        1.3202,
-        1.5316,
-        1.7705,
-        2.6790
-    ]
-    ns_list = [shocks.Shock(M_1=M_1, gamma=1.4) for M_1 in M_1_list]
-
-    for i in range(len(ns_list)):
-        np.testing.assert_almost_equal(
-            ns_list[i].p2_p1, p_ratio_list[i], decimal=4)
-        np.testing.assert_almost_equal(
-            ns_list[i].rho2_rho1, rho_ratio_list[i], decimal=4)
-        np.testing.assert_almost_equal(
-            ns_list[i].T2_T1, T_ratio_list[i], decimal=4)
+@pytest.mark.parametrize("mach_1,ratios", [
+    (1.5, {'p': 2.4583, 'rho': 1.8621, 'T': 1.3202}),
+    (1.8, {'p': 3.6133, 'rho': 2.3592, 'T': 1.5316}),
+    (2.1, {'p': 4.9783, 'rho': 2.8119, 'T': 1.7705}),
+    (3.0, {'p': 10.3333, 'rho': 3.8571, 'T': 2.6790})
+])
+def test_normal_shock_ratios(mach_1, ratios):
+    """Test shock property ratios"""
+    shock = shocks.Shock(M_1=mach_1, gamma=1.4)
+    assert np.isclose(shock.p2_p1, ratios['p'], rtol=1e-4)
+    assert np.isclose(shock.rho2_rho1, ratios['rho'], rtol=1e-4)
+    assert np.isclose(shock.T2_T1, ratios['T'], rtol=1e-4)
 
 
 def test_normal_shock_infinite_limit():

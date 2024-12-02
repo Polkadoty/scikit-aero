@@ -1,52 +1,65 @@
 [build-system]
-requires = [
-    "flit_core >=2,<3",
-    "wheel",
-]
+requires = ["flit_core >=3.9,<4"]
 build-backend = "flit_core.buildapi"
 
-[tool.flit.metadata]
-module = "skaero"
-author = "Juan Luis Cano"
-author-email = "hello@juanlu.space"
-description-file = "README.rst"
-home-page = "https://www.github.com/aeropython/scikit-aero"
-keywords = "aero,aeronautical,aerospace,engineering,atmopshere,gas"
-classifiers=[
-    "Development Status :: 2 - Pre-Alpha",
-    "Intended Audience :: Education",
+[project]
+name = "scikit-aero"
+version = "1.0.0"
+description = "Aeronautical engineering calculations in Python with support for parametric design"
+authors = [
+    {name = "Juan Luis Cano", email = "hello@juanlu.space"},
+    {name = "Andrew James Doty", email = "doty.andrewj@utexas.edu"},
+]
+maintainers = [
+    {name = "Andrew James Doty", email = "doty.andrewj@utexas.edu"},
+    {name = "Dennis Hom", email = "dennis.hom@utexas.edu"}
+
+]
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+keywords = ["aero", "aeronautical", "aerospace", "engineering", "atmosphere", "gas", "aircraft-design"]
+classifiers = [
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Physics"
 ]
-requires-python = ">=3.6"
-requires = [
-    "numpy",
-    "matplotlib",
-    "pint",
-    "scipy",    
+dependencies = [
+    "numpy>=1.20",
+    "scipy>=1.7",
+    "matplotlib>=3.4",
+    "pint>=0.18",
 ]
 
-[tool.flit.metadata.requires-extra]
+[project.optional-dependencies]
 dev = [
-    "black",
-    "isort",
-    "pytest",
-    "pytest-cov",
-    "sphinx",
-    "nbsphinx",
-    "sphinx_rtd_theme",
-    "tox",
+    "pytest>=7.0",
+    "pytest-cov>=3.0",
+    "black>=22.0",
+    "isort>=5.0",
+    "sphinx>=4.0",
+    "sphinx-rtd-theme>=1.0",
+    "nbsphinx>=0.8",
 ]
 
-[tool.flit.metadata.urls]
-Source = "https://github.com/aeropython/scikit-aero"
-Tracker = "https://github.com/aeropython/scikit-aero/issues"
+[project.urls]
+Homepage = "https://github.com/AeroPython/scikit-aero"
+Documentation = "https://scikit-aero.readthedocs.io/"
+Repository = "https://github.com/AeroPython/scikit-aero.git"
+Issues = "https://github.com/AeroPython/scikit-aero/issues"
 
+[tool.black]
+line-length = 88
+target-version = ["py38"]
 
-[tool.flit.entrypoints."console_scripts"]
-skaero = "skaero.cli:main"
+[tool.isort]
+profile = "black"
+multi-line-output = 3
