@@ -21,6 +21,7 @@ Functions
 - true_anomaly_from_mean_anomaly(M, e, tol=1e-6):
 - mean_anomaly_to_eccentric_anomaly(M, e, tol=1e-6):
 """
+
 def periapsis(a, e):
     """
     Calculate the periapsis distance of an orbit.

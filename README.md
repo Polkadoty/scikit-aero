@@ -1,6 +1,6 @@
 # Scikit-aero
 
-![Scikit-aero Logo](docs/source/_static/logo.png)
+![Logo](docs/source/_static/logo.PNG)
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://python.org)
 [![License](https://img.shields.io/pypi/l/scikit-aero.svg)](LICENSE)

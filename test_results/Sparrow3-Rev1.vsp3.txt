@@ -1,0 +1,23 @@
+Aircraft Sizing Test Results
+==========================
+
+Test Run: 2024-12-03 12:55:49
+
+test_wing_loading: PASS
+test_aspect_ratio: PASS
+test_thrust_to_weight: PASS
+test_empty_weight_fraction: PASS
+test_fuel_fraction: PASS
+test_wing_reynolds_number: PASS
+test_oswald_efficiency: PASS
+test_induced_drag: PASS
+test_wetted_area_ratio: PASS
+test_zero_lift_drag: PASS
+test_takeoff_parameter: PASS
+test_landing_distance: FAIL: 
+test_turn_radius: FAIL: 
+test_specific_excess_power: PASS
+test_range_estimate: FAIL: 
+test_endurance_estimate: FAIL: 
+test_tail_volume_coefficient: PASS
+test_static_margin: PASS
