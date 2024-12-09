@@ -1,13 +1,5 @@
 import numpy as np
-''' This module provides functions for various attitude dynamics Functions and Simulation 
-Functions
-----------
-- 
--
--
--
--
-'''
+import matplotlib.pyplot as plt
 
 # Constants
 A = 1000

@@ -21,7 +21,6 @@ Functions
 - true_anomaly_from_mean_anomaly(M, e, tol=1e-6):
 - mean_anomaly_to_eccentric_anomaly(M, e, tol=1e-6):
 """
-
 def periapsis(a, e):
     """
     Calculate the periapsis distance of an orbit.
@@ -46,7 +45,6 @@ def periapsis(a, e):
     - The function does not handle eccentricities greater than or equal to 1, which would result in non-closed orbits (parabolic or hyperbolic trajectories).
     """
     return a * (1 - e)
-
 def apoapsis(a, e):
     """
     Calculate the apoapsis of an orbit.
@@ -66,7 +64,6 @@ def apoapsis(a, e):
         The apoapsis distance.
     """
     return a * (1 + e)
-
 def semi_major_axis(a, b):
     """
     Calculate the semi-major axis of an ellipse.
@@ -87,7 +84,6 @@ def semi_major_axis(a, b):
         The semi-major axis of the ellipse.
     """
     return (a + b) / 2
-
 def semi_minor_axis(a, e):
     """
     Calculate the semi-minor axis of an ellipse.
@@ -105,7 +101,6 @@ def semi_minor_axis(a, e):
         Semi-minor axis of the ellipse.
     """
     return a * np.sqrt(1 - e**2)
-
 def eccentricity(a, b):
     """
     Calculate the eccentricity of an ellipse.
@@ -127,7 +122,6 @@ def eccentricity(a, b):
     The eccentricity is a measure of how much the ellipse deviates from being circular. It ranges from 0 (a circle) to 1 (a parabola).
     """
     return np.sqrt(1 - (b**2 / a**2))
-
 def distance_from_center(a, e, theta): 
     """
     Calculate the distance from the center of the orbit to a point on the orbit.
@@ -147,7 +141,6 @@ def distance_from_center(a, e, theta):
         Distance from the center of the orbit to the point specified by the true anomaly.
     """
     return a * (1 - e**2) / (1 + e * np.cos(np.radians(theta)))
-
 def velocity(mu, a, r):
     """
     Calculate the orbital velocity at a given distance from the central body.
@@ -167,7 +160,6 @@ def velocity(mu, a, r):
         Orbital velocity at the given distance, in units of km/s.
     """
     return np.sqrt(mu * (2/r - 1/a))
-
 def specific_angular_momentum(mu, a, e): 
     """
     Calculate the specific angular momentum of an orbit.
@@ -189,7 +181,6 @@ def specific_angular_momentum(mu, a, e):
         Specific angular momentum of the orbit.
     """
     return np.sqrt(mu * a * (1 - e**2))
-
 def semi_latus_rectum(a, e): 
     """
     Calculate the semi-latus rectum of an orbit.
@@ -209,7 +200,6 @@ def semi_latus_rectum(a, e):
         The semi-latus rectum of the orbit.
     """
     return a * (1 - e**2)
-
 def mean_motion(mu, a): 
     """
     Calculate the mean motion of an orbit.
@@ -225,7 +215,6 @@ def mean_motion(mu, a):
         Mean motion of the orbit.
     """
     return np.sqrt(mu / a**3)
-
 def position_vector(a, e, theta): 
     """
     Calculate the position vector of an orbiting body in the orbital plane.
@@ -254,7 +243,6 @@ def position_vector(a, e, theta):
     x = r * np.cos(np.radians(theta))
     y = r * np.sin(np.radians(theta))
     return np.array([x, y])
-
 def velocity_vector(mu, a, e, theta): 
     """
     Calculate the velocity vector of an orbiting body at a given true anomaly.
@@ -286,7 +274,6 @@ def velocity_vector(mu, a, e, theta):
     vx = vr * np.cos(np.radians(theta)) - vtheta * np.sin(np.radians(theta))
     vy = vr * np.sin(np.radians(theta)) + vtheta * np.cos(np.radians(theta))
     return np.array([vx, vy])
-
 def orbital_energy(mu, a): 
     """
     Calculate the specific orbital energy of an orbit.
@@ -310,7 +297,6 @@ def orbital_energy(mu, a):
     where E is the specific orbital energy, mu is the standard gravitational parameter, and a is the semi-major axis of the orbit.
     """
     return -mu / (2 * a)
-
 def orbital_period_from_semi_major_axis(a, mu): 
     """
     Calculate the orbital period from the semi-major axis.
@@ -334,7 +320,6 @@ def orbital_period_from_semi_major_axis(a, mu):
     where T is the orbital period, a is the semi-major axis, and mu is the standard gravitational parameter.
     """
     return 2 * np.pi * np.sqrt(a**3 / mu)
-
 def true_anomaly_from_mean_anomaly(M, e, tol=1e-6): 
     """
     Calculate the true anomaly from the mean anomaly for an orbit.
@@ -360,7 +345,6 @@ def true_anomaly_from_mean_anomaly(M, e, tol=1e-6):
     """
     E = mean_anomaly_to_eccentric_anomaly(M, e, tol)
     return np.degrees(2 * np.arctan(np.sqrt((1 + e) / (1 - e)) * np.tan(E / 2)))
-
 def mean_anomaly_to_eccentric_anomaly(M, e, tol=1e-6):
     """
     Converts mean anomaly to eccentric anomaly for an orbit.
