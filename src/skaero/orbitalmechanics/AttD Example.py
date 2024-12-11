@@ -1,12 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
+
 # Constants
-A = 1000
-B = 500 
-C = 800
-J = [A, B, C]
-J_m = np.diag(J)
+A = 1000; B = 500; C = 800; J = [A, B, C]; J_m = np.diag(J)
 
 # Helper functions
 def E_matrix(q):
